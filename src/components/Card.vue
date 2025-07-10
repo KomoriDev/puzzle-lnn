@@ -11,7 +11,7 @@
     >
       <div
         ref="contentElement"
-        class="transition-all duration-300 animate-fade-down" :class="[
+        class="transition-all duration-300" :class="[
           isExpanded ? 'max-h-none' : 'max-h-[7.5rem] overflow-hidden',
         ]"
       >
