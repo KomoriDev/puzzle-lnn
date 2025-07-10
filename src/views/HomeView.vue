@@ -22,38 +22,34 @@
     </div>
 
     <section class="flex flex-col gap-y-10 items-center">
-      <Card
-        v-for="(card, index) in cards"
-        :key="card.title"
-        class="w-2/3"
-        :data-index="index"
-        :title="card.title"
-        :content="card.content"
-        :topics="card.topics"
-      />
+      <div v-if="puzzles" class="w-2/3">
+        <Card
+          v-for="(puzzle, index) in puzzles"
+          :key="puzzle.title"
+          :data-index="index"
+          :puzzle="puzzle"
+        />
+      </div>
+      <p v-else>Empty</p>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { Tables } from '@/types/database'
+import { onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
+import { supabase } from '@/lib/supabase'
 
-const cards = ref([
-  {
-    title: '海龟汤',
-    content: '这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤这是一个海龟汤',
-    topics: ['悬疑', '刺激'],
-  },
-  {
-    title: '神秘事件',
-    content: '深夜的老宅里传来奇怪的脚步声，每当月圆之夜就会发生...',
-    topics: ['恐怖', '推理'],
-  },
-  {
-    title: '时间旅行者',
-    content: '一位自称来自未来的访客留下了神秘的预言，这些预言竟然一一应验...',
-    topics: ['科幻', '悬疑'],
-  },
-])
+const puzzles = ref<Tables<'puzzles'>[] | null>([])
+
+async function getPuzzles() {
+  const { data } = await supabase.from('puzzles').select()
+  data?.forEach((data) => {
+    data.created_at = new Date(data.created_at).toLocaleString('zh-CN')
+  })
+  puzzles.value = data
+}
+
+onMounted(getPuzzles)
 </script>
