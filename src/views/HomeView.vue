@@ -21,7 +21,7 @@
       <i class="fa-solid fa-heart"></i>
     </div>
 
-    <section class="flex flex-col gap-y-10 items-center">
+    <section class="flex flex-col gap-y-10 items-center justify-center">
       <div v-if="puzzles" class="w-2/3">
         <Card
           v-for="(puzzle, index) in puzzles"
@@ -32,16 +32,29 @@
       </div>
       <p v-else>Empty</p>
     </section>
+
+    <button
+      class="fixed bottom-10 right-10 bg-background-soft w-12 h-12 rounded-full z-100 hover:cursor-pointer flex items-center justify-center text-white shadow-xl"
+      @click="handleLogin"
+    >
+      <i class="fa-solid fa-user"></i>
+    </button>
+
+    <LoginModal v-if="showLogin" @close="showLogin = false" />
   </main>
 </template>
 
 <script setup lang="ts">
 import type { Tables } from '@/types/database'
+import { push } from 'notivue'
 import { onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
+import LoginModal from '@/components/LoginModal.vue'
 import { supabase } from '@/lib/supabase'
 
 const puzzles = ref<Tables<'puzzles'>[] | null>([])
+
+const showLogin = ref(false)
 
 async function getPuzzles() {
   const { data } = await supabase.from('puzzles').select()
@@ -49,6 +62,15 @@ async function getPuzzles() {
     data.created_at = new Date(data.created_at).toLocaleString('zh-CN')
   })
   puzzles.value = data
+}
+
+async function handleLogin() {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
+    push.info(`欢迎 ${user.user_metadata.username}`)
+  } else {
+    showLogin.value = true
+  }
 }
 
 onMounted(getPuzzles)

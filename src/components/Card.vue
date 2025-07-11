@@ -23,8 +23,8 @@
         class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-background-mute to-transparent pointer-events-none"
       />
     </div>
-    <footer class="flex items-center justify-between p-6 pt-0">
-      <div class="inline-flex gap-x-1">
+    <footer class="flex flex-col items-left gap-2 justify-between p-6 pt-0 sm:flex-row">
+      <div class="inline-flex">
         <span v-for="topic in puzzle.categories" class="bg-background-soft px-2.5 py-0.5 rounded-full text-sm mr-2">{{ topic }}</span>
       </div>
       <p class="text-text/70 text-sm">发布于：{{ puzzle.created_at }}</p>
@@ -59,7 +59,7 @@ onUpdated(checkOverflow)
 <style scoped>
 .max-h-\[7\.5rem\]{
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
   line-height: 1.5rem;
 }
