@@ -32,6 +32,8 @@
       </div>
       <p v-else>Empty</p>
     </section>
+
+    <Dock class="absolute right-3 top-1/2 -translate-y-1/2 sm:right-10" />
   </main>
 </template>
 
@@ -39,6 +41,7 @@
 import type { Tables } from '@/types/database'
 import { onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
+import Dock from '@/components/Dock.vue'
 import { supabase } from '@/lib/supabase'
 
 const puzzles = ref<Tables<'puzzles'>[] | null>([])
