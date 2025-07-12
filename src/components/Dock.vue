@@ -1,6 +1,6 @@
 <template>
-  <div class="dock-content space-y-2">
-    <div class="dock-content-inner">
+  <div class="space-y-2">
+    <div class="dock-content">
       <Tooltip content="主页" position="left">
         <button :class="{ 'is-active': route.name === 'home' }"><i class="fa-solid fa-house text-slate-300"></i></button>
       </Tooltip>
@@ -13,7 +13,7 @@
         <button :class="{ 'is-active': route.name === 'history' }"><i class="fa-regular fa-clock text-slate-300"></i></button>
       </Tooltip>
 
-      <span class="w-5 h-0.5 rounded-full bg-white/10"></span>
+      <span class="w-3 h-0.5 rounded-full bg-white/10 sm:w-5"></span>
 
       <Tooltip content="我" position="left">
         <button @click="handleLogin"><i class="fa-regular fa-user text-slate-300"></i></button>
@@ -27,7 +27,7 @@
         <button><i class="fa-solid fa-gear text-slate-300"></i></button>
       </Tooltip>
     </div>
-    <div class="absolute mx-2">
+    <div class="absolute mx-1 sm:mx-2">
       <button><i class="fa-solid fa-rotate-right text-slate-300"></i></button>
     </div>
   </div>
@@ -82,8 +82,8 @@ onMounted(() => {
 <style scoped lang="css">
 @reference "../style.css";
 
-.dock-content-inner {
-  @apply flex flex-col items-center gap-2 px-2 py-2 rounded-full;
+.dock-content {
+  @apply flex flex-col items-center gap-1 p-1 rounded-full sm:gap-2 sm:p-2;
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -91,7 +91,7 @@ onMounted(() => {
 }
 
 button {
-  @apply w-10 h-10 rounded-full text-slate-300 shadow-md drop-shadow-2xl;
+  @apply w-6 h-6 text-[10px] rounded-full text-slate-300 shadow-sm drop-shadow-2xl sm:w-10 sm:h-10 sm:text-base;
   background-color: rgba(255, 255, 255, 0.1);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
   border: 1px solid transparent;
