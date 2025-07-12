@@ -174,7 +174,7 @@ async function handleRegister() {
         data: {
           username: registerForm.value.username,
         },
-        emailRedirectTo: 'http://localhost:5173/confirm',
+        emailRedirectTo: window.location.origin,
       },
     })
 
