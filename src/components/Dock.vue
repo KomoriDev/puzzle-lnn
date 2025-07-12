@@ -20,7 +20,7 @@
       </Tooltip>
 
       <Tooltip v-if="userData" content="投稿" position="left">
-        <button><i class="fa-regular fa-plus text-slate-300"></i></button>
+        <button @click="modalStore.open('userUpload')"><i class="fa-regular fa-plus text-slate-300"></i></button>
       </Tooltip>
 
       <Tooltip content="设置" position="left">

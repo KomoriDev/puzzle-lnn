@@ -44,12 +44,12 @@ export interface Database {
           categories: string[] | null
           content: string
           created_at: string
-          created_by: number
-          difficulty: string
+          created_by: string
+          difficulty: Database['public']['Enums']['Difficulty']
           hints: string[] | null
           id: number
           solution: string
-          status: string
+          status: Database['public']['Enums']['Status']
           title: string
           updated_at: string
         }
@@ -57,12 +57,12 @@ export interface Database {
           categories?: string[] | null
           content: string
           created_at?: string
-          created_by: number
-          difficulty: string
+          created_by: string
+          difficulty: Database['public']['Enums']['Difficulty']
           hints?: string[] | null
           id?: number
           solution: string
-          status: string
+          status?: Database['public']['Enums']['Status']
           title: string
           updated_at?: string
         }
@@ -70,14 +70,56 @@ export interface Database {
           categories?: string[] | null
           content?: string
           created_at?: string
-          created_by?: number
-          difficulty?: string
+          created_by?: string
+          difficulty?: Database['public']['Enums']['Difficulty']
           hints?: string[] | null
           id?: number
           solution?: string
-          status?: string
+          status?: Database['public']['Enums']['Status']
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          auth_id: string | null
+          avatar_url: string | null
+          created_at: string
+          email: string
+          id: string
+          is_active: boolean
+          last_login: string | null
+          metadata: Json | null
+          role: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          auth_id?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          metadata?: Json | null
+          role?: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          auth_id?: string | null
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          metadata?: Json | null
+          role?: string
+          updated_at?: string
+          username?: string
         }
         Relationships: []
       }
@@ -89,7 +131,8 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      Difficulty: 'normal' | 'easy' | 'hard'
+      Status: 'published' | 'pending'
     }
     CompositeTypes: {
       [_ in never]: never

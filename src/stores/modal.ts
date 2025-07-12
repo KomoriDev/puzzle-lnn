@@ -3,11 +3,13 @@ import { defineStore } from 'pinia'
 import { markRaw, ref, watch } from 'vue'
 
 import LoginModal from '@/components/LoginModal.vue'
+import UploadModal from '@/components/UploadModal.vue'
 
 type ComponentProps<T> = T extends new (...args: any[]) => ComponentPublicInstance<infer P> ? P : object
 
 const ModalDialog = {
   userLogin: LoginModal,
+  userUpload: UploadModal,
 } as const satisfies Record<string, Component>
 
 type ModalComponent = keyof typeof ModalDialog
