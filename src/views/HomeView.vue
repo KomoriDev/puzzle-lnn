@@ -21,8 +21,8 @@
       <i class="fa-solid fa-heart"></i>
     </div>
 
-    <section class="flex flex-col gap-y-10 items-center justify-center">
-      <div v-if="puzzles" class="w-2/3">
+    <section class="flex flex-col items-center justify-center">
+      <div v-if="puzzles" class="w-2/3 space-y-10">
         <Card
           v-for="(puzzle, index) in puzzles"
           :key="puzzle.title"
