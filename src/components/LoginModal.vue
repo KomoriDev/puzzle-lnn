@@ -167,7 +167,7 @@ async function handleRegister() {
       throw new Error('密码不一致，请重试')
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: registerForm.value.email,
       password: registerForm.value.password,
       options: {
@@ -179,11 +179,9 @@ async function handleRegister() {
     })
 
     if (error) {
-      push.error({ title: '注册失败', message: String(error) })
+      push.error({ title: '注册失败', message: String(error.message) })
     } else {
-      showLoginModal.value = true
-      showRegisterModal.value = false
-      push.success({ title: '注册成功', message: `欢迎 ${data.user?.user_metadata.username}` })
+      push.success({ title: '邮件发送成功', message: '请查看您的邮箱以完成登录' })
     }
   } catch (error) {
     push.error({ title: '注册失败', message: String(error) })
