@@ -47,7 +47,11 @@ import { supabase } from '@/lib/supabase'
 const puzzles = ref<Tables<'puzzles'>[] | null>([])
 
 async function getPuzzles() {
-  const { data } = await supabase.from('puzzles').select()
+  const { data } = await supabase
+    .from('puzzles')
+    .select('*')
+    .eq('status', 'published')
+
   data?.forEach((data) => {
     data.created_at = new Date(data.created_at).toLocaleString('zh-CN')
   })
