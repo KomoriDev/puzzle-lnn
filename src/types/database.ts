@@ -85,7 +85,7 @@ export interface Database {
             columns: ['created_by']
             isOneToOne: false
             referencedRelation: 'users'
-            referencedColumns: ['id']
+            referencedColumns: ['auth_id']
           },
         ]
       }
