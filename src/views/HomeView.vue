@@ -22,7 +22,7 @@
     </div>
 
     <section class="flex flex-col items-center justify-center">
-      <div v-if="puzzles" class="w-2/3 space-y-10">
+      <div v-if="puzzles?.length" class="w-2/3 space-y-10">
         <Card
           v-for="(puzzle, index) in puzzles"
           :key="puzzle.title"
@@ -30,7 +30,11 @@
           :puzzle="puzzle"
         />
       </div>
-      <p v-else>Empty</p>
+      <div v-else class="flex flex-col items-center">
+        <Empty class="w-64 h-64" />
+        <h2 class="text-white text-3xl font-medium">空空如也</h2>
+        <p class="text-gray-300 text-xs mt-2">认证用户可点击 Dock 栏中的 “+” 投稿</p>
+      </div>
     </section>
 
     <Dock class="absolute right-3 top-1/2 -translate-y-1/2 sm:right-10" />
@@ -42,6 +46,7 @@ import type { Tables } from '@/types/database'
 import { onMounted, ref } from 'vue'
 import Card from '@/components/Card.vue'
 import Dock from '@/components/Dock.vue'
+import Empty from '@/components/icons/Empty.vue'
 import { supabase } from '@/lib/supabase'
 
 const puzzles = ref<Tables<'puzzles'>[] | null>([])
