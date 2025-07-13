@@ -262,6 +262,9 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      Difficulty: ['normal', 'easy', 'hard'],
+      Status: ['published', 'pending'],
+    },
   },
 } as const
