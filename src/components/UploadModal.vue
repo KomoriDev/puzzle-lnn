@@ -153,14 +153,13 @@ async function handleUpload() {
   try {
     isUploading.value = true
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('puzzles')
       .insert([puzzleForm.value])
       .select()
 
     if (error) {
       push.error({ title: '上传失败', message: error.message })
-      console.log(data, error)
     } else {
       push.success({ title: '上传成功' })
       modalStore.close('userUpload')
